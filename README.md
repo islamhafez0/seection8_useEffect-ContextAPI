@@ -1,70 +1,61 @@
-# Getting Started with Create React App
+## React - Component Side Effects & useEffect Hook
 
-This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+In the context of React, the terms "Component Side Effects" and "useEffect" are closely related to how you manage asynchronous or non-active operations within functional components.
 
-## Available Scripts
+1. **Component Side Effects:**
 
-In the project directory, you can run:
+    - CSEs refer to any operations or behaviors that occur within a React component beyond the initial render and updates due to state or props changes.
+    
+    - Examples of CSEs include data fetching, DOM manipulation, setting up subscriptions to external data sources, and other asynchronous tasks.
+    
+    - Performing side effects directly within the component can lead to issues like memory leaks, unexpected behaviors, and inefficient rendering.
 
-### `npm start`
+2. **useEffect:**
 
-Runs the app in the development mode.\
-Open [http://localhost:3000](http://localhost:3000) to view it in your browser.
+    - `useEffect` is a built-in hook in React that allows you to manage side effects in functional components.
+    
+    - It's used to perform actions that are not related to the component's render, such as data fetching, DOM manipulation, or subscription setup.
+    
+    - `useEffect` takes two arguments:
+    
+        1. A function that contains the code for the side effect (callback function).
+        2. An array of dependencies that change between renders. If omitted, the side effect will run after every render.
+    
+    - The function passed to `useEffect` is where you place your side-effect code.
 
-The page will reload when you make changes.\
-You may also see any lint errors in the console.
+---
 
-### `npm test`
+## Double Call Issue and Cleanup Function
 
-Launches the test runner in the interactive watch mode.\
-See the section about [running tests](https://facebook.github.io/create-react-app/docs/running-tests) for more information.
+In React, when using the `useEffect` hook, it's important to understand how cleanup functions work and why you might experience double calls to your effect. The cleanup function is returned by the `useEffect` hook and is used to clean up any resources or side effects created by the effect when the component unmounts or when the dependencies change.
 
-### `npm run build`
+---
 
-Builds the app for production to the `build` folder.\
-It correctly bundles React in production mode and optimizes the build for the best performance.
+## useReducer
 
-The build is minified and the filenames include the hashes.\
-Your app is ready to be deployed!
+`useReducer` is a React hook that is used for managing state in functional components. It is an alternative to the `useState` hook, and it is particularly useful when you have complex state logic that involves multiple sub-values or when you need to perform actions that depend on the previous state.
 
-See the section about [deployment](https://facebook.github.io/create-react-app/docs/deployment) for more information.
+Steps:
 
-### `npm run eject`
+1. Import the `useReducer` hook.
+2. Define a reducer function. The reducer function takes two arguments: the current state and an action. It returns a new state based on the action type and payload.
+3. It returns the current state and a dispatch function that you can use to dispatch actions.
 
-**Note: this is a one-way operation. Once you `eject`, you can't go back!**
+---
 
-If you aren't satisfied with the build tool and configuration choices, you can `eject` at any time. This command will remove the single build dependency from your project.
+## Context API & createContext
 
-Instead, it will copy all the configuration files and the transitive dependencies (webpack, Babel, ESLint, etc) right into your project so you have full control over them. All of the commands except `eject` will still work, but they will point to the copied scripts so you can tweak them. At this point you're on your own.
+The Context API is a feature that allows you to share state and data between components without having to explicitly pass data through props at every level of the component tree. It provides a way to manage and access global state within your application.
 
-You don't have to ever use `eject`. The curated feature set is suitable for small and middle deployments, and you shouldn't feel obligated to use this feature. However we understand that this tool wouldn't be useful if you couldn't customize it when you are ready for it.
+- Creating a context:
 
-## Learn More
+    You can create a context using the `React.createContext()` method. This method returns an object with two properties:
 
-You can learn more in the [Create React App documentation](https://facebook.github.io/create-react-app/docs/getting-started).
+    1. Provider: Used to wrap the components that will share the state.
+    2. Consumer: Used to access that state within your components.
 
-To learn React, check out the [React documentation](https://reactjs.org/).
+- Using the context in your components:
 
-### Code Splitting
+    With the introduction of React Hooks, you can also use the `useContext` hook to consume context within functional components.
 
-This section has moved here: [https://facebook.github.io/create-react-app/docs/code-splitting](https://facebook.github.io/create-react-app/docs/code-splitting)
-
-### Analyzing the Bundle Size
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size](https://facebook.github.io/create-react-app/docs/analyzing-the-bundle-size)
-
-### Making a Progressive Web App
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app](https://facebook.github.io/create-react-app/docs/making-a-progressive-web-app)
-
-### Advanced Configuration
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/advanced-configuration](https://facebook.github.io/create-react-app/docs/advanced-configuration)
-
-### Deployment
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/deployment](https://facebook.github.io/create-react-app/docs/deployment)
-
-### `npm run build` fails to minify
-
-This section has moved here: [https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify](https://facebook.github.io/create-react-app/docs/troubleshooting#npm-run-build-fails-to-minify)
+The Context API is particularly useful for managing global state, themes, authentication status, and other data that needs to be accessed by multiple components without prop drilling.

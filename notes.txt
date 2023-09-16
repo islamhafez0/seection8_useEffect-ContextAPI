@@ -1,0 +1,210 @@
+1- Component side effects and useEffect
+2- useEffect Cleanup and double call
+3- useReducer
+4- contextApi - createContext
+5- 
+6- 
+7- 
+8-
+
+
+
+
+
+##React - component side effect & useEffect hook
+
+In the context of react, the terms (comonent side effect and useEffect)
+are closely realated to hom you manage asynchronous or non-active operations
+within functional components.
+
+1- Component side effects: {
+    - CSEs refer to any operations or behavaiors that occur within a react
+    comonent beyound the initial render and updates due to state or props changes.
+
+    - Examples of CSEs include data fetching, DOM,
+    manipulation, setting up subscriptions to external data sources 
+    , and other asynchronous tasks.
+
+    - Performing side effects directly within the component can lead to issues like
+    memory leaks, unexpected behaviors, and ineffecient rendering. 
+}
+
+2- useEffect {
+    - Is a built-in hook in react allows you to manage side 
+    effects in functional components.
+
+    - It's used to perform actions that are not related to the 
+    component's render, such as data fetching, DOM manipulation, 
+    or subscription setup.
+
+    - 'useEffect' takes to arguments:
+        1- A function that contains the code for the side effect (callback function)
+        2- An array of dependencies change between renders.
+        if omitted, the side effect will run after every render.
+    
+    - The function passed to 'useEffect' is where you place your
+    side-effect code.
+}
+
+===============================================================================
+
+## React - Component Life Cirrle
+
+{
+    In React, the lifecycle of a component refers to the various stages or phases
+    a component goes through during its existence. React class components have 
+    different lifecycle methods that you can use to perform actions at specific 
+    points in a component's life. However, with the introduction of React Hooks in 
+    React 16.8 and later, functional components also have lifecycle-like behavior 
+    through hooks like useEffect.
+    1- {
+        -Mounting {
+            - This phase occurs when a component is being created and inserted into the DOM.
+            - Equivalent hook in functional components: useEffect with an empty dependency array ([]).
+        }
+    2- {
+        - Updating {
+            - This phase occurs when a component is re-rendered as a result of changes in state or props.
+            - Equivalent hook in functional components: useEffect with a dependency array specifying the props or state variables to watch for changes.
+        }
+    3- {
+        - Unmounting {
+            - This phase occurs when a component is being removed from the DOM.
+            - Equivalent hook in functional components: useEffect with a cleanup function.
+        }
+    4- Error Handling (Optional) {}
+    }
+    }
+    }
+{
+    -Examples {
+        // 1- mount
+            useEffect(() => {}, [])
+        // 2- all updates
+            useEffect(() => {})
+        // 3- dependency updates
+            useEffect(() => {}, ['dep1', 'dep2'])
+        // 4- unmount
+            useEffect(() => {
+               // code to execute
+           return () => {
+               // cleanup function
+            }
+        })
+    }
+}
+}
+
+===============================================================================
+
+## Double Call Issue and Cleanup Function
+{
+    In React, when using the useEffect hook, it's important to understand 
+    how cleanup functions work and why you might experience double calls 
+    to your effect. The cleanup function is returned by the useEffect hook 
+    and is used to clean up any resources or side effects created by the 
+    effect when the component unmounts or when the dependencies change.
+    {
+        1- Double Call Issue
+        2- Cleanup Function
+    }
+}
+
+===============================================================================
+
+## useReducer
+{
+    is a React hook that is used for managing state in functional components. 
+    It is an alternative to the useState hook, and it is particularly useful 
+    when you have complex state logic that involves multiple sub-values or 
+    when you need to perform actions that depend on the previous state.
+    -Steps {
+        1- Import the useReducer hook:
+        2- Define a reducer function. The reducer function 
+        takes two arguments: the current state and an action. 
+        It returns a new state based on the action type and payload.
+        3- It returns the current state and a dispatch function that 
+        you can use to dispatch actions.
+    }
+    It'is especially beneficial when you have more complex state transitions 
+    and actions, as it allows you to encapsulate the logic in a centralized 
+    place (the reducer function) and avoid issues related to stale closures 
+    when using the useState hook for multiple pieces of state.
+}
+
+===============================================================================
+
+## Context API & createContext
+{
+    Context API is a feature that allows you to share state
+    and data between components without having to explicitly
+    pass data through props at every level of the component
+    tree. It provides a way to manage and access global state 
+    within your application. The Context API consists of 
+    two main parts:
+    1- creating a context {
+        const MyContext = createContext();
+        You can create a context using the React.createContext()
+        method. This method returns an object with
+        two properties: {
+            1- Provider {
+                <MyContext.Provider value={Data} />
+                is used to wrap the components that will 
+                share the state
+            }and
+            2- Consumer {
+                <MyContext.Consumer>
+                is used to access that state within your
+                components.
+            }
+        }
+    } and 
+    2- using the context in your components {
+        Using useContext With the introduction of React Hooks, 
+        you can also use the useContext hook to consume context 
+        within functional components.
+    }
+    The Context API is particularly useful for managing 
+    global state, themes, authentication status, 
+    and other data that needs to be accessed by multiple 
+    components without prop drilling. However, 
+    keep in mind that overusing context for all 
+    state management can lead to complex and hard-to-maintain
+    code
+    ##Hooks Rules
+    1- Only Call Hooks at the Top Level {
+        Hooks should always be called at the top level of a 
+        functional component or custom hook, and they 
+        should not be called conditionally or within loops, 
+        nested functions, or callbacks. 
+    }
+    2- Call Hooks from React Functions {
+        Hooks can only be called from within React 
+        function components or custom hooks. You 
+        should not call them in regular JavaScript 
+        functions or methods.
+    }
+    3- Use Hooks Consistently {
+        Hooks should be used consistently throughout a 
+        component or custom hook. Don't mix class 
+        component state with hooks state within the 
+        same component.
+    }
+    4- Use Hooks in the Same Order {
+        When you use multiple hooks in a component, 
+        make sure to call them in the same order on 
+        every render. This order is essential to React's 
+        ability to maintain the correct state for each hook.
+    }
+    5- Custom Hooks Should Start with "use" {
+        Custom hooks that encapsulate reusable stateful 
+        logic should start with the "use" prefix. 
+    }
+    6- Avoid Using Hooks in Loops or Nested Functions {
+        Hooks should not be used inside loops or nested 
+        functions as it can lead to unexpected behavior. 
+        Always ensure that hooks are called directly 
+        within your functional component or custom hook.
+    }
+    7- Follow the Rules of Hooks in Custom Hooks {}
+}
