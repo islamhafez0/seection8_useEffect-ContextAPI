@@ -1,0 +1,13 @@
+{
+  "files": {
+    "main.css": "/seection8_useEffect-ContextAPI/static/css/main.f69dd042.css",
+    "main.js": "/seection8_useEffect-ContextAPI/static/js/main.58dd1589.js",
+    "index.html": "/seection8_useEffect-ContextAPI/index.html",
+    "main.f69dd042.css.map": "/seection8_useEffect-ContextAPI/static/css/main.f69dd042.css.map",
+    "main.58dd1589.js.map": "/seection8_useEffect-ContextAPI/static/js/main.58dd1589.js.map"
+  },
+  "entrypoints": [
+    "static/css/main.f69dd042.css",
+    "static/js/main.58dd1589.js"
+  ]
+}
